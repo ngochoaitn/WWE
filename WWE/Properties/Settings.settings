@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WWE.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WebChinhThuc" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://hopdongtinhyeu.com/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
