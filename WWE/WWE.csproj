@@ -76,6 +76,12 @@
     <Compile Include="Security\DataTypeEx.cs" />
     <Compile Include="Security\DataUseForSecurity.cs" />
     <Compile Include="Supports\XuLyDaLuong.cs" />
+    <Compile Include="UserControls\uQuetEmail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\uQuetEmail.Designer.cs">
+      <DependentUpon>uQuetEmail.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\uXuLyEmail.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -97,6 +103,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\uQuetEmail.resx">
+      <DependentUpon>uQuetEmail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\uXuLyEmail.resx">
       <DependentUpon>uXuLyEmail.cs</DependentUpon>
     </EmbeddedResource>
