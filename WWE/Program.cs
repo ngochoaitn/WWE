@@ -43,7 +43,7 @@ namespace WWE
                         Application.Run(main);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 if (new frmVerify().ShowDialog() == DialogResult.OK)
                     Application.Run(main);

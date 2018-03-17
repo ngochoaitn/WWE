@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.uXuLyEmail1 = new WWE.UserControls.uXuLyEmail();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.uQuetEmail1 = new WWE.UserControls.uQuetEmail();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -47,7 +47,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(709, 435);
+            this.tabControl1.Size = new System.Drawing.Size(835, 435);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -56,10 +56,18 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(478, 409);
+            this.tabPage1.Size = new System.Drawing.Size(827, 409);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Xử lý email";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // uXuLyEmail1
+            // 
+            this.uXuLyEmail1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uXuLyEmail1.Location = new System.Drawing.Point(3, 3);
+            this.uXuLyEmail1.Name = "uXuLyEmail1";
+            this.uXuLyEmail1.Size = new System.Drawing.Size(821, 403);
+            this.uXuLyEmail1.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -67,32 +75,24 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(701, 409);
+            this.tabPage2.Size = new System.Drawing.Size(827, 409);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Quét email";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // uXuLyEmail1
-            // 
-            this.uXuLyEmail1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uXuLyEmail1.Location = new System.Drawing.Point(3, 3);
-            this.uXuLyEmail1.Name = "uXuLyEmail1";
-            this.uXuLyEmail1.Size = new System.Drawing.Size(472, 403);
-            this.uXuLyEmail1.TabIndex = 0;
             // 
             // uQuetEmail1
             // 
             this.uQuetEmail1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uQuetEmail1.Location = new System.Drawing.Point(3, 3);
             this.uQuetEmail1.Name = "uQuetEmail1";
-            this.uQuetEmail1.Size = new System.Drawing.Size(695, 403);
+            this.uQuetEmail1.Size = new System.Drawing.Size(821, 403);
             this.uQuetEmail1.TabIndex = 0;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(709, 435);
+            this.ClientSize = new System.Drawing.Size(835, 435);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
