@@ -81,6 +81,8 @@ namespace WWE.Lib
                 _lstEmail.Add(em);
                 if (tmp != _lstEmail.Count && CoEmailMoi != null)
                 {
+                    if (_cancel)
+                        return;
                     CoEmailMoi(em);
                     tmp = _lstEmail.Count;
                 }
@@ -90,6 +92,20 @@ namespace WWE.Lib
         public List<Email> DanhSachEmail()
         {
             return _lstEmail.ToList();
+        }
+
+        private string ValidateUrl(string url)
+        {
+            if (url.Contains("/"))
+            {
+                if (url.StartsWith("/"))
+                    url = (this.LinkBanDau + url).Replace("///", "//");
+                if (url.Contains("#"))
+                    url = url.Split('#')[0];
+                if (url.Contains(this.LinkBanDau))
+                    return url;
+            }
+            return null;
         }
 
         public void QuetLink(object link)
@@ -114,8 +130,7 @@ namespace WWE.Lib
                         return;
 
                     var danhSachEmail = _validationExpression.Matches(doc.DocumentNode.OuterHtml).Cast<Match>().Select(p => p.Value).ToList().Distinct();
-                    //_lstEmail.AddRange(danhSachEmail);
-                    //_lstEmail.UnionWith(danhSachEmail);
+                    
                     this.AddEmail(danhSachEmail, link.ToString());
                     _lstLinkDaTruyCap.Add(link.ToString());
                     if (QuetLinkMoi != null)
@@ -128,19 +143,22 @@ namespace WWE.Lib
                         {
                             if (_cancel)
                             {
-                                //_linkDangQuet.UnionWith(aherf.Select(p => p.GetAttributeValue("href", link.ToString())));
+                                try
+                                {
+                                    _linkDangQuet.UnionWith(aherf.Select(p => p.GetAttributeValue("href", link.ToString())));
+                                }
+                                catch { }
+                                if (_linkDangQuet.Count == 0)
+                                {
+                                    _lstLinkDaTruyCap.Remove(link.ToString());
+                                    _linkDangQuet.Add(link.ToString());
+                                }
                                 return;
                             }
-                            string ll = l.GetAttributeValue("href", link.ToString());
-                            if (ll.Contains("/"))
-                            {
-                                if (ll.StartsWith("/"))
-                                    ll = (this.LinkBanDau + ll).Replace("///", "//");
-                                if (ll.Contains("#"))
-                                    ll = ll.Split('#')[0];
-                                if (ll.Contains(this.LinkBanDau))
-                                    ThreadPool.QueueUserWorkItem(QuetLink, ll);
-                            }
+                            string url = l.GetAttributeValue("href", link.ToString());
+                            url = ValidateUrl(url);
+                            if(url != null)
+                                ThreadPool.QueueUserWorkItem(QuetLink, url);
                         }
                     }
                 }
@@ -157,7 +175,11 @@ namespace WWE.Lib
         {
             _cancel = false;
             foreach (string s in _linkDangQuet)
-                ThreadPool.QueueUserWorkItem(QuetLink, s);
+            {
+                string url = ValidateUrl(s);
+                if (url != null)
+                    ThreadPool.QueueUserWorkItem(QuetLink, url);
+            }
         }
 
         public void DungSession()

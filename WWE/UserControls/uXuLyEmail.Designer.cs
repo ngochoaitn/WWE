@@ -40,19 +40,19 @@
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panBot = new System.Windows.Forms.Panel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblTrangThai = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnXuLy = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panMid = new System.Windows.Forms.Panel();
             this.panTop = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lblTrangThai = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnXuLy = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panBot.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panMid.SuspendLayout();
             this.panTop.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -80,6 +80,7 @@
             // 
             this.txtEmailCanKiemTra.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtEmailCanKiemTra.Location = new System.Drawing.Point(0, 26);
+            this.txtEmailCanKiemTra.MaxLength = 90000000;
             this.txtEmailCanKiemTra.Multiline = true;
             this.txtEmailCanKiemTra.Name = "txtEmailCanKiemTra";
             this.txtEmailCanKiemTra.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -111,6 +112,7 @@
             // 
             this.txtEmailCanXoa.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtEmailCanXoa.Location = new System.Drawing.Point(0, 24);
+            this.txtEmailCanXoa.MaxLength = 90000000;
             this.txtEmailCanXoa.Multiline = true;
             this.txtEmailCanXoa.Name = "txtEmailCanXoa";
             this.txtEmailCanXoa.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -180,6 +182,34 @@
             this.panBot.Size = new System.Drawing.Size(688, 48);
             this.panBot.TabIndex = 5;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblTrangThai});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 26);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(688, 22);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblTrangThai
+            // 
+            this.lblTrangThai.Name = "lblTrangThai";
+            this.lblTrangThai.Size = new System.Drawing.Size(54, 17);
+            this.lblTrangThai.Text = "Sẵn sàng";
+            // 
+            // btnXuLy
+            // 
+            this.btnXuLy.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnXuLy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnXuLy.Location = new System.Drawing.Point(330, 1);
+            this.btnXuLy.Name = "btnXuLy";
+            this.btnXuLy.Size = new System.Drawing.Size(75, 23);
+            this.btnXuLy.TabIndex = 1;
+            this.btnXuLy.Text = "Xử lý dữ liệu";
+            this.btnXuLy.UseVisualStyleBackColor = false;
+            this.btnXuLy.Click += new System.EventHandler(this.btnXuLy_Click);
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.label2);
@@ -219,34 +249,6 @@
             this.splitter1.TabIndex = 9;
             this.splitter1.TabStop = false;
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblTrangThai});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 26);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(688, 22);
-            this.statusStrip1.TabIndex = 4;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lblTrangThai
-            // 
-            this.lblTrangThai.Name = "lblTrangThai";
-            this.lblTrangThai.Size = new System.Drawing.Size(54, 17);
-            this.lblTrangThai.Text = "Sẵn sàng";
-            // 
-            // btnXuLy
-            // 
-            this.btnXuLy.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.btnXuLy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXuLy.Location = new System.Drawing.Point(330, 1);
-            this.btnXuLy.Name = "btnXuLy";
-            this.btnXuLy.Size = new System.Drawing.Size(75, 23);
-            this.btnXuLy.TabIndex = 1;
-            this.btnXuLy.Text = "Xử lý dữ liệu";
-            this.btnXuLy.UseVisualStyleBackColor = false;
-            this.btnXuLy.Click += new System.EventHandler(this.btnXuLy_Click);
-            // 
             // uXuLyEmail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,14 +263,14 @@
             this.panel1.PerformLayout();
             this.panBot.ResumeLayout(false);
             this.panBot.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panMid.ResumeLayout(false);
             this.panMid.PerformLayout();
             this.panTop.ResumeLayout(false);
             this.panTop.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }

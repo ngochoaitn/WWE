@@ -32,8 +32,9 @@ namespace WWE.UserControls
         private void EnableControl(bool b)
         {
             btnQuetDuLieu.Enabled = b;
-            btnLuuPhien.Enabled = !b;
+            btnLuuPhien.Enabled = b;
             grbThietLap.Enabled = b;
+            txtWebsite.Enabled = b;
             btnTamDungVaXuat.Enabled = true;
         }
 
@@ -120,7 +121,7 @@ namespace WWE.UserControls
             if (open.ShowDialog() != DialogResult.Cancel)
             {
                 _session = SessionQuetEmail.Load(open.FileName);
-
+                ThreadPool.SetMaxThreads(_session.SoLuong, _session.SoLuong);
                 emailBindingSource.DataSource = _session.DanhSachEmail();
 
                 _session.CoEmailMoi += _session_CoEmailMoi;
@@ -154,6 +155,10 @@ namespace WWE.UserControls
             else
             {
                 EnableControl(false);
+                _session.SoLuong = Convert.ToInt32(txtSoLuong.Text);
+                ThreadPool.SetMaxThreads(_session.SoLuong, _session.SoLuong);
+                _session.CoEmailMoi += _session_CoEmailMoi;
+                _session.QuetLinkMoi += _session_QuetLinkMoi;
                 _session.TiepTuc();
                 btnTamDungVaXuat.Text = "Tạm dừng và xuất";
             }
@@ -164,6 +169,7 @@ namespace WWE.UserControls
             SaveFileDialog save = new SaveFileDialog();
             save.Title = "Lưu tệp xuất dữ liệu";
             save.Filter = "Tệp CSV|*.csv";
+            save.FileName = "Danh sách email.csv";
             
             if (save.ShowDialog() != DialogResult.Cancel)
             {

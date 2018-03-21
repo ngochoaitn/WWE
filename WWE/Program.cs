@@ -21,6 +21,7 @@ namespace WWE
             Application.SetCompatibleTextRenderingDefault(false);
 
             frmMain main = new frmMain();
+            //Application.Run(main);
             try
             {
                 var keys = File.ReadAllLines(ConstFilePath.FILE_KEY);
@@ -45,6 +46,7 @@ namespace WWE
             }
             catch (Exception ex)
             {
+                //MessageBox.Show(ex.Message);
                 if (new frmVerify().ShowDialog() == DialogResult.OK)
                     Application.Run(main);
             }
