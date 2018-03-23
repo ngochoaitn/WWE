@@ -1,4 +1,6 @@
 ﻿using HtmlAgilityPack;
+using NCrawler;
+using NCrawler.HtmlProcessor;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -125,12 +127,13 @@ namespace WWE.Lib
 
                     _linkDangQuet.Add(link.ToString());
                     doc = hw.Load(link.ToString());
-
+                    
                     if (_cancel)
                         return;
 
-                    var danhSachEmail = _validationExpression.Matches(doc.DocumentNode.OuterHtml).Cast<Match>().Select(p => p.Value).ToList().Distinct();
-                    
+                    //var danhSachEmail = _validationExpression.Matches(doc.DocumentNode.OuterHtml).Cast<Match>().Select(p => p.Value).ToList().Distinct();
+                    var danhSachEmail = _validationExpression.Matches(doc.DocumentNode.InnerText).Cast<Match>().Select(p => p.Value).ToList().Distinct();
+
                     this.AddEmail(danhSachEmail, link.ToString());
                     _lstLinkDaTruyCap.Add(link.ToString());
                     if (QuetLinkMoi != null)
@@ -169,6 +172,36 @@ namespace WWE.Lib
                 }
                 _linkDangQuet.Remove(link.ToString());
             }
+        }
+        //https://github.com/esbencarlsen/NCrawler
+        public void QuetLink2(object link)
+        {
+            List<PropertyBag> collectedLinks = new List<PropertyBag>();
+            new CrawlerConfiguration()
+                .CrawlSeed(link.ToString())
+                .Do((crawler, bag) =>
+                {
+                    collectedLinks.Add(bag);
+                })
+                .MaxCrawlCount(1)
+                .Download()
+                .HtmlProcessor()
+                .AddLoggerStep()
+                .Run();
+
+
+            //PropertyBag propertyBag = null;
+            //new CrawlerConfiguration()
+            //    .CrawlSeed(link.ToString())
+            //    .MaxCrawlCount(1)
+            //    .Download()
+            //    .HtmlProcessor()
+            //    .AddLoggerStep()
+            //    .Do((crawler, bag) =>
+            //    {
+            //        propertyBag = bag;
+            //    })
+            //    .Run();
         }
 
         public void TiepTuc()

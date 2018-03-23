@@ -21,7 +21,7 @@ namespace WWE
             Application.SetCompatibleTextRenderingDefault(false);
 
             frmMain main = new frmMain();
-            //Application.Run(main);
+            Application.Run(main);
             try
             {
                 var keys = File.ReadAllLines(ConstFilePath.FILE_KEY);

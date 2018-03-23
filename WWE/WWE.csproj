@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WWE</RootNamespace>
     <AssemblyName>WWE</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,10 +39,6 @@
     <Reference Include="Aspose.Cells">
       <HintPath>..\Dll\Aspose.Cells.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>packages\Autofac.3.1.5\lib\net40\Autofac.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Fizzler, Version=1.1.21209.0, Culture=neutral, PublicKeyToken=4ebff4844e382110, processorArchitecture=MSIL">
       <HintPath>packages\Fizzler.1.1.0\lib\net35\Fizzler.dll</HintPath>
       <Private>True</Private>
@@ -52,10 +49,6 @@
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.5.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>packages\HtmlAgilityPack.1.5.1\lib\Net45\HtmlAgilityPack.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NCrawler.HtmlProcessor, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\NCrawler.HtmlProcessor.3.0.0\lib\net45\NCrawler.HtmlProcessor.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -125,6 +118,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="UserControls\uQuetEmail.resx">
       <DependentUpon>uQuetEmail.cs</DependentUpon>
@@ -152,6 +146,16 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="if_contact_37110.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\NCrawler\src\NCrawler.HtmlProcessor\NCrawler.HtmlProcessor.csproj">
+      <Project>{a8adb9e8-359e-4cfb-97d7-59e1e705de04}</Project>
+      <Name>NCrawler.HtmlProcessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\NCrawler\src\NCrawler\NCrawler.csproj">
+      <Project>{5e4df149-f650-4152-8410-586fb9ccf644}</Project>
+      <Name>NCrawler</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
