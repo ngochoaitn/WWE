@@ -38,6 +38,10 @@
     <Reference Include="Aspose.Cells">
       <HintPath>..\Dll\Aspose.Cells.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>packages\Autofac.3.1.5\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Fizzler, Version=1.1.21209.0, Culture=neutral, PublicKeyToken=4ebff4844e382110, processorArchitecture=MSIL">
       <HintPath>packages\Fizzler.1.1.0\lib\net35\Fizzler.dll</HintPath>
       <Private>True</Private>
@@ -48,6 +52,10 @@
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.5.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>packages\HtmlAgilityPack.1.5.1\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NCrawler.HtmlProcessor, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\NCrawler.HtmlProcessor.3.0.0\lib\net45\NCrawler.HtmlProcessor.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
