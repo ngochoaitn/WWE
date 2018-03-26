@@ -1,6 +1,4 @@
 ﻿using HtmlAgilityPack;
-using NCrawler;
-using NCrawler.HtmlProcessor;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -98,7 +96,7 @@ namespace WWE.Lib
 
         private string ValidateUrl(string url)
         {
-            if (url.Contains("/"))
+            if (url != null && url.Contains("/"))
             {
                 if (url.StartsWith("/"))
                     url = (this.LinkBanDau + url).Replace("///", "//");
@@ -118,6 +116,7 @@ namespace WWE.Lib
                 this.LinkBanDau = link.ToString();
             if (!_lstLinkDaTruyCap.Contains(link.ToString()))
             {
+                Debug.WriteLine(link.ToString());
                 HtmlWeb hw = new HtmlWeb();
                 HtmlDocument doc;
                 try
@@ -170,39 +169,11 @@ namespace WWE.Lib
                     Debug.WriteLine($"Lỗi: {link.ToString()}");
                     return;
                 }
-                _linkDangQuet.Remove(link.ToString());
             }
+            _linkDangQuet.Remove(link.ToString());
         }
         //https://github.com/esbencarlsen/NCrawler
-        public void QuetLink2(object link)
-        {
-            List<PropertyBag> collectedLinks = new List<PropertyBag>();
-            new CrawlerConfiguration()
-                .CrawlSeed(link.ToString())
-                .Do((crawler, bag) =>
-                {
-                    collectedLinks.Add(bag);
-                })
-                .MaxCrawlCount(1)
-                .Download()
-                .HtmlProcessor()
-                .AddLoggerStep()
-                .Run();
 
-
-            //PropertyBag propertyBag = null;
-            //new CrawlerConfiguration()
-            //    .CrawlSeed(link.ToString())
-            //    .MaxCrawlCount(1)
-            //    .Download()
-            //    .HtmlProcessor()
-            //    .AddLoggerStep()
-            //    .Do((crawler, bag) =>
-            //    {
-            //        propertyBag = bag;
-            //    })
-            //    .Run();
-        }
 
         public void TiepTuc()
         {

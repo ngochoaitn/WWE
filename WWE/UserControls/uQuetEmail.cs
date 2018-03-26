@@ -49,7 +49,14 @@ namespace WWE.UserControls
             {
                 emailDataGridView.BeginInvoke(new Action(() =>
                 {
-                    emailBindingSource.Add(em);
+                    try
+                    {
+                        emailBindingSource.Add(em);
+                    }
+                    catch
+                    {
+                        Debug.WriteLine("Lỗi hiển thị email");
+                    }
                     //emailDataGridView.DataSource = _session.DanhSachEmail();
                 }));
             }
