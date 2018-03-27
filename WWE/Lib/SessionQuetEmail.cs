@@ -98,12 +98,19 @@ namespace WWE.Lib
         {
             if (url != null && url.Contains("/"))
             {
-                if (url.StartsWith("/"))
-                    url = (this.LinkBanDau + url).Replace("///", "//");
-                if (url.Contains("#"))
-                    url = url.Split('#')[0];
-                if (url.Contains(this.LinkBanDau))
-                    return url;
+                try
+                {
+                    if (url.StartsWith("/"))
+                        url = (this.LinkBanDau + url).Replace("///", "//");
+                    if (url.Contains("#"))
+                        url = url.Split('#')[0];
+                    if (url.Contains(this.LinkBanDau))
+                        return url;
+                }
+                catch(Exception ex)
+                {
+                    return null;
+                }
             }
             return null;
         }
