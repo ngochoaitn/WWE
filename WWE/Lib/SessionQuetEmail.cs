@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using NCrawler;
+using NCrawler.HtmlProcessor;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -96,25 +97,29 @@ namespace WWE.Lib
 
         private string ValidateUrl(string url)
         {
-            if (url != null && url.Contains("/"))
+            if (url != null)
             {
-                try
+                url = url.ToLower();
+                if (url.Contains("/") && !url.EndsWith(".css") && !url.EndsWith(".jpg") && !url.EndsWith(".png") && !url.EndsWith(".gif"))
                 {
-                    if (url.StartsWith("/"))
-                        url = (this.LinkBanDau + url).Replace("///", "//");
-                    if (url.Contains("#"))
-                        url = url.Split('#')[0];
-                    if (url.Contains(this.LinkBanDau))
-                        return url;
-                }
-                catch(Exception ex)
-                {
-                    return null;
+                    try
+                    {
+                        if (url.StartsWith("/"))
+                            url = (this.LinkBanDau + url).Replace("///", "//");
+                        if (url.Contains("#"))
+                            url = url.Split('#')[0];
+                        if (url.Contains(this.LinkBanDau))
+                            return url;
+                    }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
                 }
             }
             return null;
         }
-
+        
         public void QuetLink(object link)
         {
             if (_cancel || link == null)
@@ -123,38 +128,45 @@ namespace WWE.Lib
                 this.LinkBanDau = link.ToString();
             if (!_lstLinkDaTruyCap.Contains(link.ToString()))
             {
-                Debug.WriteLine(link.ToString());
-                HtmlWeb hw = new HtmlWeb();
-                HtmlDocument doc;
                 try
                 {
                     if (_cancel)
                         return;
 
                     _linkDangQuet.Add(link.ToString());
-                    doc = hw.Load(link.ToString());
-                    
+                    List<PropertyBag> collectedLinks = new List<PropertyBag>();
+                    new CrawlerConfiguration()
+                        .CrawlSeed(link.ToString())
+                        .Do((crawler, bag) =>
+                        {
+                            collectedLinks.Add(bag);
+                        })
+                        .MaxCrawlCount(1)
+                        .Download()
+                        .HtmlProcessor()
+                        .AddLoggerStep()
+                        .Run();
+                    Debug.WriteLine(link.ToString());
                     if (_cancel)
                         return;
 
-                    //var danhSachEmail = _validationExpression.Matches(doc.DocumentNode.OuterHtml).Cast<Match>().Select(p => p.Value).ToList().Distinct();
-                    var danhSachEmail = _validationExpression.Matches(doc.DocumentNode.InnerText).Cast<Match>().Select(p => p.Value).ToList().Distinct();
-
-                    this.AddEmail(danhSachEmail, link.ToString());
-                    _lstLinkDaTruyCap.Add(link.ToString());
-                    if (QuetLinkMoi != null)
-                        QuetLinkMoi();
-                    var aherf = doc.DocumentNode.SelectNodes("//a[@href]");
-
-                    if (aherf != null)
+                    if (collectedLinks.Count > 0 && collectedLinks[0].Text != null)
                     {
-                        foreach (HtmlNode l in aherf)
+                        var danhSachEmail = _validationExpression.Matches( collectedLinks[0].Text).Cast<Match>().Select(p => p.Value).Distinct();
+
+                        this.AddEmail(danhSachEmail, link.ToString());
+                        _lstLinkDaTruyCap.Add(link.ToString());
+                        if (QuetLinkMoi != null)
+                            QuetLinkMoi();
+
+                        foreach (var l in collectedLinks)
                         {
+                            #region Nếu Hủy
                             if (_cancel)
                             {
                                 try
                                 {
-                                    _linkDangQuet.UnionWith(aherf.Select(p => p.GetAttributeValue("href", link.ToString())));
+                                    _linkDangQuet.UnionWith(collectedLinks.Select(p => Convert.ToString(p.Step.Uri)));
                                 }
                                 catch { }
                                 if (_linkDangQuet.Count == 0)
@@ -164,9 +176,11 @@ namespace WWE.Lib
                                 }
                                 return;
                             }
-                            string url = l.GetAttributeValue("href", link.ToString());
+                            #endregion
+
+                            string url = l?.Step?.Uri?.ToString() ?? null;
                             url = ValidateUrl(url);
-                            if(url != null)
+                            if (url != null)
                                 ThreadPool.QueueUserWorkItem(QuetLink, url);
                         }
                     }
@@ -195,6 +209,7 @@ namespace WWE.Lib
 
         public void DungSession()
         {
+            Debug.WriteLine("Hủy");
             _cancel = true;
         }
 
